@@ -1,0 +1,44 @@
+
+spring:
+  application:
+    name: Ai File system
+
+  datasource:
+    url:
+    username:
+    password:
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    com.file.manager.security: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+server:
+  port: 8085
+
+jwt:
+  secret: --==
+
+aws:
+  s3:
+    access-key:
+    secret-key: +/
+    region: ap-south-1
+    bucket-name: aifilemanager
+  sqs:
+    queue-url:
+    region: ap-south-1
+  bedrock:
+    api-key: A
+    model-id: amazon.titan-text-lite-v1
+    words: 20

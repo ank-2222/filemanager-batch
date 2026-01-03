@@ -1,0 +1,57 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.5'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.file'
+version = '0.0.1-SNAPSHOT'
+description = 'Manages Ai inferencing of Files'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springAiVersion', "1.0.1")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.ai:spring-ai-tika-document-reader'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation("org.slf4j:slf4j-api:2.0.17")
+	implementation("org.springframework.security:spring-security-core:6.5.3")
+	implementation("org.springframework.boot:spring-boot-starter-security:3.5.4")
+	implementation("software.amazon.awssdk:s3:2.32.27")
+	implementation 'software.amazon.awssdk:sqs:2.33.0'
+	implementation 'software.amazon.awssdk:rekognition:2.33.1'
+	implementation 'software.amazon.awssdk:bedrockruntime:2.33.1'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
